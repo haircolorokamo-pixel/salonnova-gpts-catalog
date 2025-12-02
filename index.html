@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalonNova GPTカタログ</title>
+<link rel="stylesheet" href="assets/style.css"/>
+<meta name="description" content="作ったGPTをカテゴリ別に一覧で表示。無料DLと購入リンクを1ページに集約。">
+</head>
+
+<body>
+<header>
+<img src="assets/logo.png" class="brand-logo" alt="SalonNova ロゴ">
+<h1>SalonNova GPTカタログ</h1>
+<p>カテゴリ別で探して、気に入ったGPTにアクセス！<br>無料DLと購入リンク付き。</p>
+</header>
+
+<div class="wrap">
+
+<!-- カテゴリをループ表示 -->
+<div id="gpt-container"></div>
+
+</div><!-- wrap -->
+
+<script>
+// -----------------------
+// カテゴリ名
+// -----------------------
+const categories = [
+  'カラー教育',
+  '生活サポート',
+  '実用サポート',
+  'ブログ・SNS'
+];
+
+// -----------------------
+// GPTデータ（全件）
+// -----------------------
+const gpts = [
+  {name:'フィヨーレマスターくん', cat:'カラー教育', icon:'assets/icons/fiore-master.png', buy:'#'},
+  {name:'カラー疑問解決くん', cat:'カラー教育', icon:'assets/icons/color-question.png', buy:'#'},
+  {name:'カラー勉強クイズくん', cat:'カラー教育', icon:'assets/icons/color-quiz.png', buy:'#'},
+  {name:'ブリーチ勉強クイズくん', cat:'カラー教育', icon:'assets/icons/bleach-quiz.png', buy:'#'},
+
+  {name:'おうちシェフさん', cat:'生活サポート', icon:'assets/icons/chef.png', buy:'#'},
+
+  {name:'カラー・ブリーチ即算くん', cat:'実用サポート', icon:'assets/icons/bleach-calc.png', buy:'#'},
+  {name:'無限GPT製造機くん', cat:'実用サポート', icon:'assets/icons/infinite-gpt.png', buy:'#'},
+  {name:'インサイト分析くん', cat:'実用サポート', icon:'assets/icons/magnifier.png', buy:'#'},
+  {name:'アイデアスパークくん', cat:'実用サポート', icon:'assets/icons/idea-bulb.png', buy:'#'},
+  {name:'コピーライターくん', cat:'実用サポート', icon:'assets/icons/scroll-pen.png', buy:'#'},
+  {name:'台本職人くん', cat:'実用サポート', icon:'assets/icons/megaphone.png', buy:'#'},
+
+  {name:'ブログミューズ', cat:'ブログ・SNS', icon:'assets/icons/blog-muse.png', buy:'#'},
+  {name:'ブログ職人GPT心理タイトル診断メーカー', cat:'ブログ・SNS', icon:'assets/icons/blog-diagnose.png', buy:'#'},
+  {name:'リールプランナーくん', cat:'ブログ・SNS', icon:'assets/icons/film.png', buy:'#'},
+  {name:'境界線ブレイカーくん', cat:'ブログ・SNS', icon:'assets/icons/lion.png', buy:'#'},
+  {name:'SNSナビゲーターくん', cat:'ブログ・SNS', icon:'assets/icons/phone-compass.png', buy:'#'},
+  {name:'スレッズブースターくん', cat:'ブログ・SNS', icon:'assets/icons/rocket.png', buy:'#'},
+  {name:'ターゲット・デザイナーくん', cat:'ブログ・SNS', icon:'assets/icons/target.png', buy:'#'}
+];
+
+// -----------------------
+// カテゴリごとに表示
+// -----------------------
+const container = document.getElementById("gpt-container");
+
+categories.forEach(category => {
+  const section = document.createElement("section");
+  section.innerHTML = `<h3>${category}</h3>`;
+  
+  const box = document.createElement("div");
+  box.className = "cat-wrap";
+
+  gpts
+    .filter(item => item.cat === category)
+    .forEach(g => {
+      const card = document.createElement("a");
+      card.className = "card";
+      card.href = g.buy; // 購入リンク
+      card.innerHTML = `
+        <img src="${g.icon}" class="card-img" alt="">
+        <span class="card-title">${g.name}</span>
+      `;
+      box.appendChild(card);
+    });
+
+  section.appendChild(box);
+  container.appendChild(section);
+});
+</script>
+
+</body>
+</html>
