@@ -1,233 +1,278 @@
-:root{
-  --bg:#f5f1e6;
-  --card:#ffffff;
-  --ink:#333333;
-  --muted:#777777;
-  --accent:#ff7e3b;
-  --accent-soft:rgba(255,126,59,.12);
-  --border:rgba(0,0,0,.06);
-  --shadow:0 10px 25px rgba(0,0,0,.12);
-  --radius-lg:18px;
-  --radius-md:12px;
-  --radius-sm:999px;
-  --gap-lg:32px;
-  --gap-md:20px;
-  --gap-sm:12px;
-  --font-ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+/* ===============================
+   SalonNova GPT カタログ デザイン
+   =============================== */
+
+:root {
+  --bg: #e8f3ff;
+  --bg-alt: #f5f9ff;
+  --card-bg: #ffffff;
+  --accent: #ff8250;
+  --accent-soft: rgba(255, 130, 80, 0.12);
+  --text-main: #222222;
+  --text-sub: #6b7280;
+  --border-soft: #dde6f5;
+  --chip-bg: #e0edff;
+  --chip-text: #2563eb;
+  --shadow-soft: 0 12px 35px rgba(15, 23, 42, 0.10);
+  --radius-card: 18px;
+  --radius-pill: 999px;
+  --transition-fast: 160ms ease-out;
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
+/* 全体 */
 
 *,
 *::before,
-*::after{
-  box-sizing:border-box;
+*::after {
+  box-sizing: border-box;
 }
 
-body{
-  margin:0;
-  padding:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:var(--font-ui);
-  line-height:1.6;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
+body {
+  font-family: var(--font-main);
+  background: radial-gradient(circle at top, #f7fbff 0, #e3f0ff 40%, #d4e7ff 100%);
+  color: var(--text-main);
 }
 
-img{
-  max-width:100%;
-  height:auto;
-  display:block;
-}
+/* ページ全体のラッパ */
 
-/* ---------- レイアウト ---------- */
-
-.wrap{
-  max-width:1120px;
-  margin:0 auto;
-  padding:32px 16px 64px;
+.wrap {
+  max-width: 1120px;
+  margin: 32px auto 64px;
+  padding: 24px 16px 64px;
 }
 
 /* ヘッダー */
-header{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-bottom:32px;
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.brand-logo{
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  flex-shrink:0;
+.brand-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
 }
 
-.brand-logo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+header h1 {
+  font-size: 24px;
+  margin: 0;
 }
 
-header .title-block h1{
-  margin:0 0 4px;
-  font-size:24px;
-}
-
-header .title-block p{
-  margin:0;
-  font-size:13px;
-  color:var(--muted);
+header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--text-sub);
 }
 
 /* カテゴリ見出し */
-.category-block{
-  margin-top:40px;
+
+.category-block {
+  margin-top: 32px;
 }
 
-.category-block:first-of-type{
-  margin-top:8px;
+.category-block:first-of-type {
+  margin-top: 16px;
 }
 
-.category-title{
-  font-size:18px;
-  font-weight:700;
-  margin:0 0 12px;
+.category-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.category-sub{
-  margin:0 0 20px;
-  font-size:13px;
-  color:var(--muted);
+.category-title {
+  font-size: 18px;
+  font-weight: 700;
 }
 
-/* ---------- GPTカード ---------- */
-
-.gpt-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:var(--gap-lg);
+.category-count {
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--chip-bg);
+  color: var(--chip-text);
 }
 
-.gpt-card{
-  background:var(--card);
-  border-radius:var(--radius-lg);
-  box-shadow:var(--shadow);
-  padding:20px 18px 18px;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  position:relative;
+/* カードのグリッド */
+
+.gpt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* GPTカード */
+
+.gpt-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(245,249,255,0.97));
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  padding: 16px 16px 18px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.9);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background 180ms ease-out, border-color var(--transition-fast);
+}
+
+.gpt-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(255, 184, 140, 0.18) 0, transparent 60%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease-out;
+}
+
+.gpt-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.22);
+  border-color: rgba(148, 163, 184, 0.5);
+}
+
+.gpt-card:hover::before {
+  opacity: 1;
 }
 
 /* アイコン */
-.gpt-card-icon{
-  width:120px;
-  height:120px;
-  margin:0 auto;
-  border-radius:50%;
-  background:#fff;
-  overflow:hidden;
-  box-shadow:0 6px 14px rgba(0,0,0,.1);
+
+.gpt-card-icon {
+  width: 88px;
+  height: 88px;
+  margin: 4px auto 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.15);
+  overflow: hidden;
 }
 
-.gpt-card-icon img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.gpt-card-icon img {
+  width: 82px;
+  height: 82px;
+  object-fit: cover;
 }
 
-/* テキスト部分 */
-.gpt-card-title{
-  margin:0;
-  font-size:16px;
-  text-align:center;
+/* テキスト */
+
+.gpt-card-title {
+  font-size: 15px;
+  margin: 6px 0 4px;
+  font-weight: 700;
 }
 
-.gpt-card-price{
-  margin:0;
-  font-size:14px;
-  text-align:center;
-  color:var(--accent);
-  font-weight:700;
+.gpt-card-price {
+  font-size: 14px;
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-weight: 600;
 }
 
-.gpt-card-badge{
-  position:absolute;
-  top:14px;
-  right:16px;
-  font-size:11px;
-  padding:3px 10px;
-  border-radius:var(--radius-sm);
-  background:var(--accent-soft);
-  color:var(--accent);
+.gpt-card-price::before {
+  content: "";
 }
 
-/* ボタンエリア */
-.gpt-card-actions{
-  margin-top:8px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  justify-content:center;
+/* ボタン */
+
+.gpt-card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
 }
 
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:7px 14px;
-  font-size:13px;
-  border-radius:var(--radius-sm);
-  border:1px solid transparent;
-  cursor:pointer;
-  transition:background .15s ease,transform .15s ease,box-shadow .15s ease,border-color .15s ease;
-  white-space:nowrap;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
-.btn-primary{
-  background:var(--accent);
-  color:#fff;
-  box-shadow:0 6px 14px rgba(0,0,0,.18);
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(255, 130, 80, 0.45);
 }
 
-.btn-primary:hover{
-  transform:translateY(-1px);
-  box-shadow:0 8px 18px rgba(0,0,0,.22);
+.btn-primary:hover {
+  background: #ff6a2a;
+  border-color: #ff6a2a;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(255, 130, 80, 0.55);
 }
 
-.btn-outline{
-  background:#fff;
-  color:var(--ink);
-  border-color:var(--border);
+.btn-outline {
+  background: var(--accent-soft);
+  border-color: rgba(255, 130, 80, 0.4);
+  color: #d3541e;
 }
 
-.btn-outline:hover{
-  border-color:var(--accent);
+.btn-outline:hover {
+  background: #ffffff;
 }
 
-/* ---------- レスポンシブ ---------- */
+/* スマホ対応 */
 
-@media (max-width:640px){
-  .wrap{
-    padding:20px 14px 40px;
+@media (max-width: 768px) {
+  .wrap {
+    padding: 16px 12px 40px;
+    margin-top: 16px;
   }
 
-  header{
-    flex-direction:row;
-    align-items:center;
+  header {
+    flex-direction: row;
+    align-items: center;
   }
 
-  .brand-logo{
-    width:52px;
-    height:52px;
+  header h1 {
+    font-size: 20px;
   }
 
-  .category-block{
-    margin-top:28px;
+  .gpt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gpt-card {
+    padding: 14px 14px 16px;
+  }
+
+  .gpt-card-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .gpt-card-icon img {
+    width: 74px;
+    height: 74px;
   }
 }
