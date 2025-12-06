@@ -1,24 +1,16 @@
-/* ===============================
-   SalonNova GPT カタログ デザイン
-   =============================== */
-
 :root {
-  --bg: #e8f3ff;
-  --bg-alt: #f5f9ff;
-  --card-bg: #ffffff;
-  --accent: #ff8250;
-  --accent-soft: rgba(255, 130, 80, 0.12);
-  --text-main: #222222;
-  --text-sub: #6b7280;
-  --border-soft: #dde6f5;
-  --chip-bg: #e0edff;
-  --chip-text: #2563eb;
-  --shadow-soft: 0 12px 35px rgba(15, 23, 42, 0.10);
-  --radius-card: 18px;
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --accent: #4bb3ff;
+  --accent-soft: #e4f4ff;
+  --ink: #222222;
+  --muted: #777777;
+  --border: #e1e1e6;
+  --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --radius-lg: 16px;
+  --radius-md: 12px;
   --radius-pill: 999px;
-  --transition-fast: 160ms ease-out;
-  --font-main: system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --transition-fast: 0.18s ease-out;
 }
 
 /* 全体 */
@@ -29,250 +21,286 @@
   box-sizing: border-box;
 }
 
-html,
 body {
   margin: 0;
   padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, #e4f4ff 0, #f5f5f7 45%, #ffffff 100%);
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  font-family: var(--font-main);
-  background: radial-gradient(circle at top, #f7fbff 0, #e3f0ff 40%, #d4e7ff 100%);
-  color: var(--text-main);
-}
-
-/* ページ全体のラッパ */
-
-.wrap {
-  max-width: 1120px;
-  margin: 32px auto 64px;
-  padding: 24px 16px 64px;
+img {
+  max-width: 100%;
+  display: block;
 }
 
 /* ヘッダー */
 
-header {
+.site-header {
+  padding: 20px 16px 8px;
+}
+
+.site-header-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.brand {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 12px;
 }
 
 .brand-logo {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
   object-fit: cover;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+  background: #cfe9ff;
 }
 
-header h1 {
-  font-size: 24px;
-  margin: 0;
-}
-
-header p {
-  margin: 4px 0 0;
-  font-size: 13px;
-  color: var(--text-sub);
-}
-
-/* カテゴリ見出し */
-
-.category-block {
-  margin-top: 32px;
-}
-
-.category-block:first-of-type {
-  margin-top: 16px;
-}
-
-.category-header {
+.brand-text {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 10px;
+  flex-direction: column;
+}
+
+.brand-label {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.brand-title {
+  margin: 2px 0 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.site-lead {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* メイン */
+
+.site-main {
+  padding: 0 16px 40px;
+}
+
+#catalog {
+  max-width: 1040px;
+  margin: 12px auto 0;
+}
+
+/* カテゴリ */
+
+.category-section {
+  margin-top: 28px;
 }
 
 .category-title {
+  margin: 0 0 10px;
   font-size: 18px;
-  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
 }
 
 .category-count {
-  font-size: 12px;
-  padding: 2px 10px;
-  border-radius: var(--radius-pill);
-  background: var(--chip-bg);
-  color: var(--chip-text);
+  font-size: 13px;
+  color: var(--muted);
 }
 
-/* カードのグリッド */
+/* カードグリッド */
 
-.gpt-grid {
+.card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
 }
 
-/* GPTカード */
+/* カード */
 
-.gpt-card {
-  background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(245,249,255,0.97));
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-soft);
-  padding: 16px 16px 18px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.9);
-  position: relative;
-  overflow: hidden;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-    background 180ms ease-out, border-color var(--transition-fast);
-}
-
-.gpt-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top right, rgba(255, 184, 140, 0.18) 0, transparent 60%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 200ms ease-out;
-}
-
-.gpt-card:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.22);
-  border-color: rgba(148, 163, 184, 0.5);
-}
-
-.gpt-card:hover::before {
-  opacity: 1;
-}
-
-/* アイコン */
-
-.gpt-card-icon {
-  width: 88px;
-  height: 88px;
-  margin: 4px auto 10px;
-  border-radius: 50%;
-  background: #ffffff;
+.card {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.15);
-  overflow: hidden;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              border-color var(--transition-fast),
+              background var(--transition-fast);
 }
 
-.gpt-card-icon img {
-  width: 82px;
-  height: 82px;
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+  border-color: rgba(75, 179, 255, 0.6);
+  background: linear-gradient(135deg, #ffffff 0, #f5fbff 80%);
+}
+
+.card-icon-wrap {
+  flex: 0 0 auto;
+}
+
+.card-icon {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
   object-fit: cover;
+  background: #f3f4f6;
+  box-shadow: 0 0 0 4px #ffffff, 0 10px 15px rgba(15, 23, 42, 0.18);
 }
 
-/* テキスト */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
 
-.gpt-card-title {
+.card-title {
+  margin: 0;
   font-size: 15px;
-  margin: 6px 0 4px;
   font-weight: 700;
 }
 
-.gpt-card-price {
-  font-size: 14px;
-  margin: 0 0 10px;
-  color: var(--accent);
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: #1161b8;
+  font-size: 11px;
   font-weight: 600;
 }
 
-.gpt-card-price::before {
-  content: "";
+.card-desc {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* 価格表示 */
+
+.card-price {
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #f97316;   /* オレンジ。好みで変えてOK */
+}
+
+/* ボタン行 */
+
+.card-actions {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 /* ボタン */
 
-.gpt-card-actions {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.btn {
+.card-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 12px;
-  font-size: 12px;
+  padding: 5px 12px;
   border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
   text-decoration: none;
-  border: 1px solid transparent;
   cursor: pointer;
-  white-space: nowrap;
-  transition: background-color var(--transition-fast),
-    color var(--transition-fast),
-    border-color var(--transition-fast),
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast);
+  border: 1px solid transparent;
+  transition: background var(--transition-fast),
+              color var(--transition-fast),
+              border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
 }
 
-.btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #ffffff;
-  box-shadow: 0 10px 25px rgba(255, 130, 80, 0.45);
-}
-
-.btn-primary:hover {
-  background: #ff6a2a;
-  border-color: #ff6a2a;
-  transform: translateY(-1px);
-  box-shadow: 0 12px 30px rgba(255, 130, 80, 0.55);
-}
-
-.btn-outline {
-  background: var(--accent-soft);
-  border-color: rgba(255, 130, 80, 0.4);
-  color: #d3541e;
-}
-
-.btn-outline:hover {
+/* アウトラインボタン（詳細ページ） */
+.card-btn.outline {
   background: #ffffff;
+  color: #0c74c7;
+  border-color: rgba(12, 116, 199, 0.3);
 }
 
-/* スマホ対応 */
+.card-btn.outline:hover {
+  background: #e4f4ff;
+  border-color: #0c74c7;
+}
 
-@media (max-width: 768px) {
-  .wrap {
-    padding: 16px 12px 40px;
-    margin-top: 16px;
-  }
+/* プライマリーボタン（購入ページへ） */
+.card-btn.primary {
+  background: #f97316;
+  color: #ffffff;
+  border-color: #f97316;
+  box-shadow: 0 4px 10px rgba(248, 113, 113, 0.3);
+}
 
-  header {
-    flex-direction: row;
-    align-items: center;
-  }
+.card-btn.primary:hover {
+  background: #ea580c;
+  border-color: #ea580c;
+}
 
-  header h1 {
+/* フッター */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 12px 16px 18px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* スマホ最適化 */
+
+@media (max-width: 599px) {
+  .brand-title {
     font-size: 20px;
   }
 
-  .gpt-grid {
-    grid-template-columns: 1fr;
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .gpt-card {
-    padding: 14px 14px 16px;
+  .card {
+    padding: 10px;
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
-  .gpt-card-icon {
-    width: 80px;
-    height: 80px;
+  .card-icon {
+    width: 72px;
+    height: 72px;
   }
 
-  .gpt-card-icon img {
-    width: 74px;
-    height: 74px;
+  .card-body {
+    align-items: center;
+  }
+
+  .card-actions {
+    justify-content: center;
   }
 }
