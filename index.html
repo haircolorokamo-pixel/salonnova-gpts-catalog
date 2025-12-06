@@ -1,333 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SalonNova GPTカタログ</title>
   <link rel="stylesheet" href="assets/style.css?v=2">
+  <meta name="description" content="SalonNovaが作った美容師さん向けGPTをカテゴリ別に一覧表示。有料・無料GPTをアイコン付きで確認し、詳細ページや購入ページへすぐアクセスできます。">
 </head>
-<!-- フィヨーレマスターくん（有料） -->
-<div class="gpt-card" data-category="color-education">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/fiore-master.png" alt="フィヨーレマスターくん">
-  </div>
-  <h3 class="gpt-card-title">フィヨーレマスターくん</h3>
-  <p class="gpt-card-price">¥19,800</p>
-  <div class="gpt-card-actions">
-    <a href="https://quill-height-d15.notion.site/2c0836d922088037be23f51e9c8e8053?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-    <a href="https://okamontext.base.ec/items/121178443"
-       class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-      購入ページへ
-    </a>
-  </div>
-</div>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand">
+        <img src="assets/logo.png" alt="SalonNova ロゴ" class="brand-logo">
+        <div class="brand-text">
+          <p class="brand-label">SalonNova</p>
+          <h1 class="brand-title">GPTカタログ</h1>
+        </div>
+      </div>
+      <p class="site-lead">
+        カテゴリ別で探して、気になったGPTにアクセス！<br>
+        有料版は「詳細ページ → 購入ページへ」、無料版は「詳細ページからそのまま利用できます」。
+      </p>
+    </div>
+  </header>
 
-<!-- カラー・ブリーチ即算くん（有料） -->
-<div class="gpt-card" data-category="color-education">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/bleach-calc.png" alt="カラー・ブリーチ即算くん">
-  </div>
-  <h3 class="gpt-card-title">カラー・ブリーチ即算くん</h3>
-  <p class="gpt-card-price">¥2,000</p>
-  <div class="gpt-card-actions">
-    <a href="https://quill-height-d15.notion.site/2c0836d92208805b995ffcf106e219b2?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-    <a href="https://okamontext.base.ec/items/127422329"
-       class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-      購入ページへ
-    </a>
-  </div>
-</div>
+  <main class="site-main">
+    <div id="catalog"></div>
+  </main>
 
-<!-- カラー勉強クイズくん（無料） -->
-<div class="gpt-card" data-category="color-education">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/color-quiz.png" alt="カラー勉強クイズくん">
-  </div>
-  <h3 class="gpt-card-title">カラー勉強クイズくん</h3>
-  <p class="gpt-card-price">無料</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d92208801e8828ed567d7071a5?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+  <footer class="site-footer">
+    <p>© SalonNova / 岡本裕也</p>
+  </footer>
 
-<!-- ブリーチ勉強クイズくん（無料） -->
-<div class="gpt-card" data-category="color-education">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/bleach-quiz.png" alt="ブリーチ勉強クイズくん">
-  </div>
-  <h3 class="gpt-card-title">ブリーチ勉強クイズくん</h3>
-  <p class="gpt-card-price">無料</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d9220880ebb78cddbc27053c23?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+  <script>
+    // GPTデータ定義（価格・詳細URL・購入URLまで全部入り）
+    const gpts = [
+      // ===== カラー教育 ==============================
+      {
+        id: "fiore-master",
+        name: "フィヨーレマスターくん",
+        cat: "カラー教育",
+        icon: "assets/icons/fiore-master.png",
+        tag: "フィヨーレ特化",
+        desc: "フィヨーレカラーのレシピ・理論・QAを丸ごとサポートするAI講師。",
+        price: "¥19,800",
+        detailUrl: "https://quill-height-d15.notion.site/2c0836d922088037be23f51e9c8e8053?source=copy_link",
+        buyUrl: "https://okamontext.base.ec/items/121178443"
+      },
+      {
+        id: "color-question",
+        name: "カラー疑問解決くん",
+        cat: "カラー教育",
+        icon: "assets/icons/color-question.png",
+        tag: "疑問解消",
+        desc: "カラー中の「あれ？これどうしよう？」を即座に相談できるヘルプGPT。",
+        price: "無料",
+        detailUrl: "https://www.notion.so/2c0836d92208800ab150f788ac19e859?source=copy_link",
+        buyUrl: null            // 無料なので購入ボタンなし
+      },
+      {
+        id: "color-quiz",
+        name: "カラー勉強クイズくん",
+        cat: "カラー教育",
+        icon: "assets/icons/color-quiz.png",
+        tag: "クイズ学習",
+        desc: "カラー理論をクイズ形式で反復学習。スキマ時間に知識を底上げ。",
+        price: "無料",
+        detailUrl: "https://www.notion.so/2c0836d92208801e8828ed567d7071a5?source=copy_link",
+        buyUrl: null
+      },
+      {
+        id: "bleach-quiz",
+        name: "ブリーチ勉強クイズくん",
+        cat: "カラー教育",
+        icon: "assets/icons/bleach-quiz.png",
+        tag: "ブリーチ学習",
+        desc: "ブリーチ特化のクイズGPT。リフト・残留・ケアまでチェックできます。",
+        price: "無料",
+        detailUrl: "https://www.notion.so/2c0836d9220880ebb78cddbc27053c23?source=copy_link",
+        buyUrl: null
+      },
+      {
+        id: "bleach-calc",
+        name: "カラー・ブリーチ即算くん",
+        cat: "カラー教育",
+        icon: "assets/icons/bleach-calc.png",
+        tag: "調合計算",
+        desc: "比率と総量を入力するだけで、カラー・ブリーチのg計算を自動で算出。",
+        price: "¥2,000",
+        detailUrl: "https://quill-height-d15.notion.site/2c0836d92208805b995ffcf106e219b2?source=copy_link",
+        buyUrl: "https://okamontext.base.ec/items/127422329"
+      },
 
-<!-- カラー疑問解決くん（無料） -->
-<div class="gpt-card" data-category="color-education">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/color-question.png" alt="カラー疑問解決くん">
-  </div>
-  <h3 class="gpt-card-title">カラー疑問解決くん</h3>
-  <p class="gpt-card-price">無料</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d92208800ab150f788ac19e859?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+      // ===== 生活サポート ============================
+      {
+        id: "chef",
+        name: "おうちシェフさん",
+        cat: "生活サポート",
+        icon: "assets/icons/chef.png",
+        tag: "時短レシピ",
+        desc: "冷蔵庫の余り物から、忙しい美容師のための時短レシピを提案。",
+        price: "無料",
+        detailUrl: "https://www.notion.so/2c0836d922088034ae46ce3c892c803d?source=copy_link",
+        buyUrl: null
+      },
 
-<!-- おうちシェフさん（無料） -->
-<div class="gpt-card" data-category="life-support">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/chef.png" alt="おうちシェフさん">
-  </div>
-  <h3 class="gpt-card-title">おうちシェフさん</h3>
-  <p class="gpt-card-price">無料</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d922088034ae46ce3c892c803d?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+      // ===== 実用サポート ============================
+      {
+        id: "infinite-gpt",
+        name: "無限GPT製造機くん",
+        cat: "実用サポート",
+        icon: "assets/icons/infinite-gpt.png",
+        tag: "GPT設計",
+        desc: "目的を伝えるだけで、オリジナルGPTの設計案を自動生成してくれる開発パートナー。",
+        price: "¥13,980",
+        detailUrl: "https://www.notion.so/GPT-2c0836d922088057bd5ad714b2f90363?source=copy_link",
+        buyUrl: "https://okamontext.base.ec/items/127422124"
+      },
+      {
+        id: "insight",
+        name: "インサイト分析くん",
+        cat: "実用サポート",
+        icon: "assets/icons/magnifier.png",
+        tag: "分析",
+        desc: "SNSやブログの投稿から、反応の良いパターンや改善ポイントを分析。",
+        price: "SNSパックに含まれます",
+        detailUrl: "https://www.notion.so/2c0836d922088066be19d935ed5bdf50?source=copy_link",
+        buyUrl: null
+      },
+      {
+        id: "idea-spark",
+        name: "アイデアスパークくん",
+        cat: "実用サポート",
+        icon: "assets/icons/idea-bulb.png",
+        tag: "企画アイデア",
+        desc: "新メニュー・キャンペーン・企画案など、アイデア出し専門のブレストGPT。",
+        price: "SNSパックに含まれます",
+        detailUrl: "https://www.notion.so/2c0836d92208803dbed6cf20381128e5?source=copy_link",
+        buyUrl: null
+      },
+      {
+        id: "copy-writer",
+        name: "コピーライターくん",
+        cat: "実用サポート",
+        icon: "assets/icons/scroll-pen.png",
+        tag: "文章作成",
+        desc: "キャッチコピーや説明文を、サロンの雰囲気に合わせて提案。",
+        price: "SNSパックに含まれます",
+        detailUrl: "https://www.notion.so/2c0836d9220880f79c95d95b44cfa695?source=copy_link",
+        buyUrl: null
+      },
 
-<!-- 無限GPT製造機くん（有料） -->
-<div class="gpt-card" data-category="practical-support">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/infinite-gpt.png" alt="無限GPT製造機くん">
-  </div>
-  <h3 class="gpt-card-title">無限GPT製造機くん</h3>
-  <p class="gpt-card-price">¥13,980</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/GPT-2c0836d922088057bd5ad714b2f90363?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-    <a href="https://okamontext.base.ec/items/127422124"
-       class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-      購入ページへ
-    </a>
-  </div>
-</div>
+      // ===== ブログ・SNS =============================
+      {
+        id: "blog-muse",
+        name: "ブログミューズ",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/blog-muse.png",
+        tag: "ブログ構成",
+        desc: "読みやすいブログ構成と本文ドラフトを作ってくれるブロガー専用GPT。",
+        price: "¥5,980",
+        detailUrl: "https://www.notion.so/2c0836d92208800894d3cd5fc40ab71d?source=copy_link",
+        buyUrl: "https://okamontext.base.ec/items/127422609"
+      },
+      {
+        id: "blog-diagnose",
+        name: "ブログ職人GPT心理タイトル診断メーカー",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/blog-diagnose.png",
+        tag: "タイトル診断",
+        desc: "心理トリガーを使ったブログタイトル案を大量生成し、診断・添削します。",
+        price: "¥6,980",
+        detailUrl: "https://www.notion.so/GPT-2c0836d92208805eafe1f647770bc45c?source=copy_link",
+        buyUrl: "https://okamontext.base.ec/items/127422765"
+      },
+      {
+        id: "life-story",
+        name: "あなたの人生ストーリーが価値に変わるGPT",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/life-story.png",
+        tag: "人生ストーリー設計",
+        desc: "あなたやクライアントの人生ストーリーを再構築し、SNS戦略・企画案に転用します。",
+        price: "¥3,980",
+        detailUrl: "https://quill-height-d15.notion.site/GPT-2c0836d9220880e6821ccb976b7862b0?source=copy_link",
+        buyUrl: "https://okamontext.base.ec/items/127528874"
+      },
+      {
+        id: "sns-pack",
+        name: "SNS運用特化9ヒーロー",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/sns-pack.png",
+        tag: "SNS運用パック",
+        desc: "ターゲット設計〜ネタ出し〜台本〜分析まで、SNS運用を丸ごと支える9種のGPTセット。",
+        price: "¥9,800",
+        detailUrl: "https://www.notion.so/SNS-2c1836d92208805db853dcf3d5da6145?source=copy_link",
+        buyUrl: "https://okamontext.base.ec/items/127423137"
+      },
+      {
+        id: "reel-planner",
+        name: "リールプランナーくん",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/film.png",
+        tag: "リール企画",
+        desc: "ショート動画の企画〜構成〜テロップ案までまとめて提案。",
+        price: "SNSパックに含まれます",
+        detailUrl: "https://www.notion.so/2c0836d9220880cda93bf93ea8924dc7?source=copy_link",
+        buyUrl: null
+      },
+      {
+        id: "border-breaker",
+        name: "境界線ブレイカーくん",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/lion.png",
+        tag: "殻破りコンテンツ",
+        desc: "今までの自分の枠を超える、攻めたコンテンツ案を一緒に作る相棒。",
+        price: "SNSパックに含まれます",
+        detailUrl: "https://www.notion.so/2c0836d9220880e581aec87ddc9387a5?source=copy_link",
+        buyUrl: null
+      },
+      {
+        id: "sns-navigator",
+        name: "SNSナビゲーターくん",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/phone.png",
+        tag: "SNS戦略",
+        desc: "Instagramを中心に、投稿ジャンルや頻度・導線設計をサポート。",
+        price: "SNSパックに含まれます",
+        detailUrl: "https://www.notion.so/SNS-2c0836d92208800ca591ee1916aee164?source=copy_link",
+        buyUrl: null
+      },
+      {
+        id: "threads-booster",
+        name: "スレッズブースターくん",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/rocket.png",
+        tag: "拡散サポート",
+        desc: "Threadsでの投稿ネタ・切り口・返信案をブーストしてくれるGPT。",
+        price: "SNSパックに含まれます",
+        detailUrl: "https://www.notion.so/2c0836d9220880eeab04c1a95bbb106b?source=copy_link",
+        buyUrl: null
+      },
+      {
+        id: "script-maker",
+        name: "台本職人くん",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/megaphone.png",
+        tag: "台本作成",
+        desc: "YouTubeやリール用の台本を、構成〜セリフまでまとめて作成。",
+        price: "SNSパックに含まれます",
+        detailUrl: "https://www.notion.so/2c0836d92208807cb309d3e3a473256e?source=copy_link",
+        buyUrl: null
+      },
+      {
+        id: "target-designer",
+        name: "ターゲット・デザイナーくん",
+        cat: "ブログ・SNS",
+        icon: "assets/icons/target.png",
+        tag: "ペルソナ設計",
+        desc: "理想の顧客像を具体化し、それに合わせた発信テーマを設計。",
+        price: "SNSパックに含まれます",
+        detailUrl: "https://www.notion.so/2c0836d92208806da191f21d2c744a24?source=copy_link",
+        buyUrl: null
+      }
+    ];
 
-<!-- ブログミューズ（有料） -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/blog-muse.png" alt="ブログミューズ">
-  </div>
-  <h3 class="gpt-card-title">ブログミューズ</h3>
-  <p class="gpt-card-price">¥5,980</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d92208800894d3cd5fc40ab71d?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-    <a href="https://okamontext.base.ec/items/127422609"
-       class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-      購入ページへ
-    </a>
-  </div>
-</div>
+    // カテゴリ一覧
+    const categories = Array.from(new Set(gpts.map(g => g.cat)));
 
-<!-- ブログ職人GPT（心理タイトル診断）（有料） -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/blog-diagnose.png" alt="ブログ職人GPT（心理タイトル診断）">
-  </div>
-  <h3 class="gpt-card-title">ブログ職人GPT（心理タイトル診断）</h3>
-  <p class="gpt-card-price">¥6,980</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/GPT-2c0836d92208805eafe1f647770bc45c?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-    <a href="https://okamontext.base.ec/items/127422765"
-       class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-      購入ページへ
-    </a>
-  </div>
-</div>
+    function renderCatalog() {
+      const container = document.getElementById("catalog");
+      container.innerHTML = "";
 
-<!-- 人生ストーリー（有料） -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/life-story.png" alt="人生ストーリー">
-  </div>
-  <h3 class="gpt-card-title">人生ストーリー</h3>
-  <p class="gpt-card-price">¥3,980</p>
-  <div class="gpt-card-actions">
-    <a href="https://quill-height-d15.notion.site/GPT-2c0836d9220880e6821ccb976b7862b0?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-    <a href="https://okamontext.base.ec/items/127528874"
-       class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-      購入ページへ
-    </a>
-  </div>
-</div>
+      categories.forEach(cat => {
+        const items = gpts.filter(g => g.cat === cat);
+        const section = document.createElement("section");
+        section.className = "category-section";
 
-<!-- SNS運用特化9ヒーロー（有料パック本体） -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/sns-pack.png" alt="SNS運用特化9ヒーロー">
-  </div>
-  <h3 class="gpt-card-title">SNS運用特化9ヒーロー</h3>
-  <p class="gpt-card-price">¥9,800</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/SNS-2c1836d92208805db853dcf3d5da6145?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-    <a href="https://okamontext.base.ec/items/127423137"
-       class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-      購入ページへ
-    </a>
-  </div>
-</div>
+        const h2 = document.createElement("h2");
+        h2.className = "category-title";
+        h2.textContent = cat;
 
-<!-- ターゲット・デザイナーくん -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/target.png" alt="ターゲット・デザイナーくん">
-  </div>
-  <h3 class="gpt-card-title">ターゲット・デザイナーくん</h3>
-  <p class="gpt-card-price">SNSパックに含まれます</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d92208806da191f21d2c744a24?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+        const count = document.createElement("span");
+        count.className = "category-count";
+        count.textContent = `（${items.length}件）`;
+        h2.appendChild(count);
 
-<!-- リールプランナーくん -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/film.png" alt="リールプランナーくん">
-  </div>
-  <h3 class="gpt-card-title">リールプランナーくん</h3>
-  <p class="gpt-card-price">SNSパックに含まれます</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d9220880cda93bf93ea8924dc7?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+        const grid = document.createElement("div");
+        grid.className = "card-grid";
 
-<!-- 境界線ブレイカーくん -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/lion.png" alt="境界線ブレイカーくん">
-  </div>
-  <h3 class="gpt-card-title">境界線ブレイカーくん</h3>
-  <p class="gpt-card-price">SNSパックに含まれます</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d9220880e581aec87ddc9387a5?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+        items.forEach(g => {
+          const card = document.createElement("div");
+          card.className = "card";
 
-<!-- スレッズブースターくん -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/rocket.png" alt="スレッズブースターくん">
-  </div>
-  <h3 class="gpt-card-title">スレッズブースターくん</h3>
-  <p class="gpt-card-price">SNSパックに含まれます</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d9220880eeab04c1a95bbb106b?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+          const iconWrap = document.createElement("div");
+          iconWrap.className = "card-icon-wrap";
 
-<!-- SNSナビゲーターくん -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/phone-compass.png" alt="SNSナビゲーターくん">
-  </div>
-  <h3 class="gpt-card-title">SNSナビゲーターくん</h3>
-  <p class="gpt-card-price">SNSパックに含まれます</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/SNS-2c0836d92208800ca591ee1916aee164?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+          const img = document.createElement("img");
+          img.src = g.icon;
+          img.alt = g.name;
+          img.className = "card-icon";
 
-<!-- 台本職人くん -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/megaphone.png" alt="台本職人くん">
-  </div>
-  <h3 class="gpt-card-title">台本職人くん</h3>
-  <p class="gpt-card-price">SNSパックに含まれます</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d92208807cb309d3e3a473256e?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+          iconWrap.appendChild(img);
 
-<!-- コピーライターくん -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/scroll-pen.png" alt="コピーライターくん">
-  </div>
-  <h3 class="gpt-card-title">コピーライターくん</h3>
-  <p class="gpt-card-price">SNSパックに含まれます</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d9220880f79c95d95b44cfa695?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+          const body = document.createElement("div");
+          body.className = "card-body";
 
-<!-- アイデアスパークくん -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/idea-bulb.png" alt="アイデアスパークくん">
-  </div>
-  <h3 class="gpt-card-title">アイデアスパークくん</h3>
-  <p class="gpt-card-price">SNSパックに含まれます</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d9220880f79c95d95b44cfa695?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+          const name = document.createElement("h3");
+          name.className = "card-title";
+          name.textContent = g.name;
 
-<!-- インサイト分析くん -->
-<div class="gpt-card" data-category="blog-sns">
-  <div class="gpt-card-icon">
-    <img src="assets/icons/magnifier.png" alt="インサイト分析くん">
-  </div>
-  <h3 class="gpt-card-title">インサイト分析くん</h3>
-  <p class="gpt-card-price">SNSパックに含まれます</p>
-  <div class="gpt-card-actions">
-    <a href="https://www.notion.so/2c0836d922088066be19d935ed5bdf50?source=copy_link"
-       class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-      詳細ページを見る
-    </a>
-  </div>
-</div>
+          const meta = document.createElement("div");
+          meta.className = "card-meta";
+
+          const tag = document.createElement("span");
+          tag.className = "card-tag";
+          tag.textContent = g.tag;
+
+          meta.appendChild(tag);
+
+          const desc = document.createElement("p");
+          desc.className = "card-desc";
+          desc.textContent = g.desc;
+
+          const price = document.createElement("p");
+          price.className = "card-price";
+          price.textContent = g.price || "";
+
+          const actions = document.createElement("div");
+          actions.className = "card-actions";
+
+          if (g.detailUrl) {
+            const detailLink = document.createElement("a");
+            detailLink.href = g.detailUrl;
+            detailLink.target = "_blank";
+            detailLink.rel = "noopener noreferrer";
+            detailLink.className = "card-btn outline";
+            detailLink.textContent = "詳細ページを見る";
+            actions.appendChild(detailLink);
+          }
+
+          if (g.buyUrl) {
+            const buyLink = document.createElement("a");
+            buyLink.href = g.buyUrl;
+            buyLink.target = "_blank";
+            buyLink.rel = "noopener noreferrer";
+                        buyLink.className = "card-btn primary";
+            buyLink.textContent = "購入ページへ";
+            actions.appendChild(buyLink);
+          }
+
+          body.appendChild(name);
+          body.appendChild(meta);
+          body.appendChild(desc);
+          body.appendChild(price);
+          body.appendChild(actions);
+
+          card.appendChild(iconWrap);
+          card.appendChild(body);
+
+          grid.appendChild(card);
+        });
+
+        section.appendChild(h2);
+        section.appendChild(grid);
+        container.appendChild(section);
+      });
+    }
+
+    renderCatalog();
+  </script>
+</body>
+</html>
