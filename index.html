@@ -21,6 +21,12 @@
         カテゴリ別で探して、気になったGPTにアクセス！<br>
         有料版は「詳細ページ → 購入ページへ」、無料版は「詳細ページからそのまま利用できます」。
       </p>
+
+      <!-- ▼ ここが新しく追加した「カテゴリーナビ」 -->
+      <nav class="category-nav">
+        <div id="category-nav" class="category-nav-inner"></div>
+      </nav>
+      <!-- ▲ ここまで -->
     </div>
   </header>
 
@@ -29,7 +35,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>© SalonNova / 岡本裕也</p>
+    <p>© 株式会社R・I・V・E</p>
   </footer>
 
   <script>
@@ -267,14 +273,44 @@
     // カテゴリ一覧
     const categories = Array.from(new Set(gpts.map(g => g.cat)));
 
+    // カテゴリ → アンカーID
+    const anchorIdByCategory = {
+      "カラー教育": "cat-color-education",
+      "生活サポート": "cat-life-support",
+      "実用サポート": "cat-practical-support",
+      "ブログ・SNS": "cat-blog-sns"
+    };
+
     function renderCatalog() {
       const container = document.getElementById("catalog");
+      const navInner = document.getElementById("category-nav");
       container.innerHTML = "";
+      if (navInner) navInner.innerHTML = "";
 
       categories.forEach(cat => {
         const items = gpts.filter(g => g.cat === cat);
+        const anchorId = anchorIdByCategory[cat] || ("cat-" + cat);
+
+        // ▼ 上部のカテゴリーナビを生成
+        if (navInner) {
+          const navItem = document.createElement("a");
+          navItem.href = "#" + anchorId;
+          navItem.className = "category-nav-item";
+          navItem.textContent = `${cat}（${items.length}件）`;
+          navItem.addEventListener("click", function (e) {
+            e.preventDefault();
+            const section = document.getElementById(anchorId);
+            if (section) {
+              section.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          });
+          navInner.appendChild(navItem);
+        }
+
+        // ▼ 各カテゴリブロック本体
         const section = document.createElement("section");
         section.className = "category-section";
+        section.id = anchorId;
 
         const h2 = document.createElement("h2");
         h2.className = "category-title";
@@ -344,7 +380,7 @@
             buyLink.href = g.buyUrl;
             buyLink.target = "_blank";
             buyLink.rel = "noopener noreferrer";
-                        buyLink.className = "card-btn primary";
+            buyLink.className = "card-btn primary";
             buyLink.textContent = "購入ページへ";
             actions.appendChild(buyLink);
           }
