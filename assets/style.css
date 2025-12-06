@@ -1,159 +1,233 @@
-:root {
-  --bg: #f5f5f5;
-  --card: #ffffff;
-  --accent: #ff9f0a;
-  --accent-soft: rgba(255, 159, 10, 0.12);
-  --border: #e3e3e3;
-  --text: #222222;
-  --text-sub: #666666;
-  --badge-paid: #ff3b30;
-  --badge-free: #34c759;
+:root{
+  --bg:#f5f1e6;
+  --card:#ffffff;
+  --ink:#333333;
+  --muted:#777777;
+  --accent:#ff7e3b;
+  --accent-soft:rgba(255,126,59,.12);
+  --border:rgba(0,0,0,.06);
+  --shadow:0 10px 25px rgba(0,0,0,.12);
+  --radius-lg:18px;
+  --radius-md:12px;
+  --radius-sm:999px;
+  --gap-lg:32px;
+  --gap-md:20px;
+  --gap-sm:12px;
+  --font-ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
+*::after{
+  box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-ui);
+  line-height:1.6;
 }
 
-/* 全体ラッパー */
-.wrap {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 24px 16px 40px;
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+
+/* ---------- レイアウト ---------- */
+
+.wrap{
+  max-width:1120px;
+  margin:0 auto;
+  padding:32px 16px 64px;
 }
 
 /* ヘッダー */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 24px;
+header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:32px;
 }
 
-header img.brand-logo {
-  height: 40px;
-  width: auto;
+.brand-logo{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  flex-shrink:0;
 }
 
-header h1 {
-  font-size: 22px;
-  margin: 0;
+.brand-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-header p {
-  font-size: 13px;
-  margin: 4px 0 0;
-  color: var(--text-sub);
+header .title-block h1{
+  margin:0 0 4px;
+  font-size:24px;
 }
 
-/* カテゴリー見出し */
-.category-block {
-  margin-top: 32px;
+header .title-block p{
+  margin:0;
+  font-size:13px;
+  color:var(--muted);
 }
 
-.category-block h2 {
-  font-size: 18px;
-  margin: 0 0 16px;
-  padding-bottom: 4px;
-  border-bottom: 2px solid var(--accent);
+/* カテゴリ見出し */
+.category-block{
+  margin-top:40px;
 }
 
-/* GPTカード */
-.gpt-card {
-  display: flex;
-  gap: 16px;
-  padding: 14px 14px;
-  margin-bottom: 12px;
-  background: var(--card);
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+.category-block:first-of-type{
+  margin-top:8px;
 }
 
-/* アイコン部分 */
-.gpt-card-icon {
-  flex-shrink: 0;
+.category-title{
+  font-size:18px;
+  font-weight:700;
+  margin:0 0 12px;
 }
 
-.gpt-card-icon img {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+.category-sub{
+  margin:0 0 20px;
+  font-size:13px;
+  color:var(--muted);
 }
 
-/* 本文部分 */
-.gpt-card-body {
-  flex: 1;
-  min-width: 0;
+/* ---------- GPTカード ---------- */
+
+.gpt-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:var(--gap-lg);
 }
 
-.gpt-card-title {
-  font-size: 16px;
-  margin: 0 0 4px;
+.gpt-card{
+  background:var(--card);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
+  padding:20px 18px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  position:relative;
 }
 
-.gpt-card-price {
-  font-size: 13px;
-  margin: 0 0 10px;
-  color: var(--badge-paid);
-  font-weight: 600;
+/* アイコン */
+.gpt-card-icon{
+  width:120px;
+  height:120px;
+  margin:0 auto;
+  border-radius:50%;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 6px 14px rgba(0,0,0,.1);
 }
 
-.gpt-card-price.free {
-  color: var(--badge-free);
+.gpt-card-icon img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-/* ボタン行 */
-.gpt-card-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+/* テキスト部分 */
+.gpt-card-title{
+  margin:0;
+  font-size:16px;
+  text-align:center;
 }
 
-a.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 10px;
-  font-size: 12px;
-  border-radius: 999px;
-  text-decoration: none;
-  border: 1px solid transparent;
-  white-space: nowrap;
+.gpt-card-price{
+  margin:0;
+  font-size:14px;
+  text-align:center;
+  color:var(--accent);
+  font-weight:700;
 }
 
-a.btn-outline {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-soft);
+.gpt-card-badge{
+  position:absolute;
+  top:14px;
+  right:16px;
+  font-size:11px;
+  padding:3px 10px;
+  border-radius:var(--radius-sm);
+  background:var(--accent-soft);
+  color:var(--accent);
 }
 
-a.btn-primary {
-  background: var(--accent);
-  color: #fff;
+/* ボタンエリア */
+.gpt-card-actions{
+  margin-top:8px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
 }
 
-/* 通常リンクの色（ボタン以外） */
-a {
-  color: #0066cc;
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:7px 14px;
+  font-size:13px;
+  border-radius:var(--radius-sm);
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:background .15s ease,transform .15s ease,box-shadow .15s ease,border-color .15s ease;
+  white-space:nowrap;
 }
 
-/* スマホ向け */
-@media (max-width: 640px) {
-  .gpt-card {
-    align-items: flex-start;
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+  box-shadow:0 6px 14px rgba(0,0,0,.18);
+}
+
+.btn-primary:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(0,0,0,.22);
+}
+
+.btn-outline{
+  background:#fff;
+  color:var(--ink);
+  border-color:var(--border);
+}
+
+.btn-outline:hover{
+  border-color:var(--accent);
+}
+
+/* ---------- レスポンシブ ---------- */
+
+@media (max-width:640px){
+  .wrap{
+    padding:20px 14px 40px;
+  }
+
+  header{
+    flex-direction:row;
+    align-items:center;
+  }
+
+  .brand-logo{
+    width:52px;
+    height:52px;
+  }
+
+  .category-block{
+    margin-top:28px;
   }
 }
